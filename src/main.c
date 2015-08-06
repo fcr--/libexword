@@ -720,6 +720,7 @@ char * create_prompt(char *cwd) {
 
 void interactive(struct state *s)
 {
+	const char * exit_command = "exit";
 	char * line = NULL;
 	char * prompt = NULL;
 	printf("Exword dictionary tool.\n"
@@ -731,8 +732,10 @@ void interactive(struct state *s)
 		prompt = create_prompt(s->cwd);
 		line = readline(prompt);
 		free(prompt);
-		if (line == NULL)
-			break;
+		if (line == NULL) {
+			line = xmalloc(strlen(exit_command) + 1);
+			strcpy(line, exit_command);
+		}
 		if (*line == '\0') {
 			free(line);
 			continue;
