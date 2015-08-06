@@ -90,7 +90,11 @@ dict <sub-function>
 			This deletes the dictionary with the specified id.
 
 		install <id>
-			This will install the dictionary with the specified id.
+			This will install the dictionary with the specified id. For this to be a
+			successful operation you must make sure that the dictionary directory
+			named <id> is a direct child of the current working directory.
+			Inside the <id> directory must appear the content of the dictionary itself,
+			including "diction.htm".
 
 
 Permissions
