@@ -728,19 +728,21 @@ void interactive(struct state *s)
 	INIT_LIST_HEAD(&(s->cmd_list));
 	load_history();
 	while (s->running) {
-		free(line);
-		free(prompt);
 		prompt = create_prompt(s->cwd);
 		line = readline(prompt);
-		if (line == NULL || *line == '\0')
+		free(prompt);
+		if (line == NULL)
+			break;
+		if (*line == '\0') {
+			free(line);
 			continue;
+		}
 		add_history(line);
 		fill_arg_list(&(s->cmd_list), line);
 		process_command(s);
 		clear_arg_list(&(s->cmd_list));
+		free(line);
 	}
-	free(line);
-	free(prompt);
 	store_history();
 }
 
