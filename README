@@ -93,4 +93,15 @@ dict <sub-function>
 			This will install the dictionary with the specified id.
 
 
+Permissions
+==========================
 
+To be able to run the connect command, on GNU/Linux systems without root
+permissions, create the file /etc/udev/rules.d/85-casio-ex-word.rules with the
+following content:
+
+SUBSYSTEM=="usb", ATTRS{idVendor}=="07cf", ATTRS{idProduct}=="6101", \
+        GROUP="plugdev", MODE="0660"
+
+And then, to apply the changes run, reconnecting the device after that:
+udevadm control --reload-rules
